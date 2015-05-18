@@ -51,10 +51,10 @@
         }));
 
         // add question text
-        $("#jspsych-survey-text-" + i).append('<p class="jspsych-survey-text">' + trial.questions[i] + '</p>');
+        $("#jspsych-survey-text-" + i).append('<p class="jspsych-survey-text">' + trial.questions[i]);
 
         // add text box
-        $("#jspsych-survey-text-" + i).append('<input type="text" name="#jspsych-survey-text-response-' + i + '"></input>');
+        $("#jspsych-survey-text-" + i).append('<input type="text" name="#jspsych-survey-text-response-' + i + '"></input></p>');
       }
 
       // add submit button

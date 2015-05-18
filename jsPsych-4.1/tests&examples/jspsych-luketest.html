@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+  	<title>Word Learning</title>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="../jspsych.js"></script>
@@ -8,8 +9,8 @@
     <script src="../plugins/jspsych-single-stim.js"></script>
     <script src="../plugins/jspsych-survey-likert.js"></script>
     <script src="../plugins/jspsych-survey-text.js"></script>
-    <link rel="stylesheet" href="css/jquery-ui.css"></link>
-    <link rel="stylesheet" href="../css/jspsych.css"></link>
+    <script src="../plugins/jspsych-survey-text-table.js"></script>
+    <link rel="stylesheet" href="../css/jspsych.css">
   </head>
   <body>
     <div id="jspsych-target"></div>
@@ -204,7 +205,7 @@ var block_T1_study = {
 var T1_stim_orig =[[''+wordArray[24].strong+'    '+'_______'+''],[''+wordArray[25].weak+'    '+'_______'+''],[''+wordArray[26].strong+'    '+'_______'+''],[''+wordArray[27].weak+'    '+'_______'+''],[''+wordArray[28].strong+'    '+'_______'+''],[''+wordArray[29].weak+'    '+'_______'+''],[''+wordArray[30].strong+'    '+'_______'+''],[''+wordArray[31].weak+'    '+'_______'+'']];
 var T1_stim = jsPsych.randomization.repeat(T1_stim_orig, 1);//Shuffled
 var block_T1 = {
-	type: 'survey-text',
+	type: 'survey-text-table',
 	questions: T1_stim,
 	is_html: true,
 	
@@ -297,12 +298,22 @@ var likert_RRQ = {
       5,5,5,5,5,5]] // note the the intervals and labels don't necessarily need to match.
   };
   
+  var tetris = {
+  	type: "single-stim",
+  	stimuli: ['<embed src="http://www.classicgamesarcade.com/games/flash-tetris.swf" menu=false width=550 height=650' + 
+            'quality=high type="application/x-shockwave-flash"' + 
+            'pluginspage="http://www.macromedia.com/go/getflashplayer/" />'],
+    is_html: true,
+    timing_response: 5000,
+    continue_after_response: false,
+    prompt: "Please play tetris for a little while. This page will automatically advance after a certain amount of time."
+  };
   
 //Need to make function that pseudo shuffles in pairs (to have learning blocks preceed the test block etc, e.g. T2 learn block is always before T2 Test block)
 //var the_blocks = jsPsych.randomization.repeat(block_T1_study, block_T1,block_T2_study,block_T2,block_T3_study,block_T3,block_R1_study,block_R1,block_R2_study,block_R2,block_R3_study,block_R3], 1);
 var the_blocks = [block_T1_study,block_T1,block_T2_study,block_T2,block_T3_study,block_T3,block_R1_study,block_R1,block_R2_study,block_R2,block_R3_study,block_R3];
 pairShuff(the_blocks);
-var the_experiment = [intro,the_blocks[0],the_blocks[1],the_blocks[2],the_blocks[3],the_blocks[4],the_blocks[5],the_blocks[6],the_blocks[7],the_blocks[8],the_blocks[9],the_blocks[10],the_blocks[11],final_exam_block,likert_RRQ];
+var the_experiment = [tetris, intro,the_blocks[0],the_blocks[1],the_blocks[2],the_blocks[3],the_blocks[4],the_blocks[5],the_blocks[6],the_blocks[7],the_blocks[8],the_blocks[9],the_blocks[10],the_blocks[11],final_exam_block,likert_RRQ];
 
   jsPsych.init({
     display_element: $('#jspsych-target'),
