@@ -10,6 +10,7 @@
     <script src="plugins/jspsych-survey-likert.js"></script>
     <script src="plugins/jspsych-survey-text.js"></script>
     <script src="plugins/jspsych-survey-text-table.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css"></link>
     <link rel="stylesheet" href="css/jspsych.css">
   </head>
   <body>
@@ -72,6 +73,8 @@ var wordArray = [
     {strong: 'Cuff',       weak: 'Jacket',        target: '<u><b>SHIRT</u></b>'},
     {strong: 'Hose',       weak: 'Mist',          target: '<u><b>WATER</u></b>'}
 ];
+
+
 
 //SHUFFLE ARRAY
 wordArray = fisherYates(wordArray); //This function is at the bottom
@@ -325,7 +328,7 @@ var likert_RRQ = {
       	5,5,5,5,5,5,
       	5,5,5,5,5,5]] // note the the intervals and labels don't necessarily need to match.
   };
-  
+    
   var tetris_300 = {
   	type: "single-stim",
   	stimuli: ['<embed src="http://www.classicgamesarcade.com/games/flash-tetris.swf" menu=false width=550 height=650' + 
@@ -355,7 +358,7 @@ var the_blocks = [block_T1_study,
 
 pairShuff(the_blocks);
 
-var the_experiment = [ intro,
+var the_experiment = [intro,
 /*				the_blocks[0],
 				the_blocks[1],
 				tetris,
