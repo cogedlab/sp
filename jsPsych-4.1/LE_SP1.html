@@ -10,6 +10,7 @@
     <script src="plugins/jspsych-survey-likert.js"></script>
     <script src="plugins/jspsych-survey-text.js"></script>
     <script src="plugins/jspsych-survey-text-table.js"></script>
+    <script src="plugins/jspsych-survey-text-table-sp.js"></script>
     <link rel="stylesheet" href="css/jquery-ui.css"></link>
     <link rel="stylesheet" href="css/jspsych.css">
   </head>
@@ -18,10 +19,168 @@
   </body>
   <script>
 
+var self_cond = Math.round(Math.random());
+var id_num = Math.floor(Math.random()*1000000);
   //TO FINISH: 
   // 1) Add in the self prime and control passages as blocks
   // 2) Add in blocks for 15 second gaps between study and test/restudy
   // 3) Add in blocks for 5 minutes gap between final test/restudy block and the FINAL free recall test
+
+var control0 = ["The trip from Hays to Washington fills his time for two long days.",
+	"On his first day, he drives over the Snowy Range of southeastern Wyoming, part of the southern Rocky Mountains.",
+	"On his second day, he travels along the eastern shore of Utah's Great Salt Lake, across the Snake River Plain of Idaho, and along the Columbia River.",
+	"He spends his first two nights in motels to stay well-rested.",
+	"His first stop in the Pacific Northwest is Mount Rainier National Park in the Cascade Mountains; here he begins his exploration of the coastal ecosystems of Washington, Oregon, and northern California.",
+	"When conditions permit, he also visits Mount St. Helens (even after more than 20 years, the impact and recovery are impressive).",
+	"From the Cascades, the traveler moves to the coast to study temperate rain forests, coastal sand dunes, an estuary, and tide pools.",
+	"His trip home includes a drive through the Sierra Nevada and across the desert to visit Great Basin National Park near the Nevada-Utah border.",
+	"From here, his journey takes him over the Colorado Plateau and Rocky Mountains, back to the Great Plains.",
+	"He is soon home and can summarize his findings."
+	];
+	
+var control1 = ["Dr. Chris Fritsen is associate director of the Nevada Space Grant Consortium and friend of the Astrobiology Academy.",
+	"He hosted the 2003 crew during their visit to DRI.",
+	"Over breakfast, Dr. Fritsen spoke about the history of the Desert Research Institute as well as the breath and scope of current research efforts there.",
+	"He also discussed the astrobiology-related research conducted at DRI as part of NASA's EPSCoR program.",
+	"The academy students had the opportunity to tour DRI's facilities, including the vertical laboratory, class 100 clean room, Western Regional Climate Center, and the EcoCells contained in the Great Basin Environmental Research Lab.",
+	"Dr. Fritsen led the brave academy students into his cold lab, which is kept at a constant temperature of -10 degrees Celsius!",
+	"As a system microbial ecologist, Dr. Fritsen utilizes these ideal laboratory conditions in order to study life in the extreme environment of ice.",
+	"Finally, the students spoke with Wendy Calvin, a geophysicist at DRI and member of the Mars Exploration Rover Science team."
+	];
+	
+var control2 = ["She traded the 18 foot fiberglass Necky Looksha IV in for a 14 foot plastic Perception Acadia kayak.",
+	"She plans on doing more inland paddling and this is more in keeping with the smaller waters while still being comfortable enough for some rough ocean going, if need be.",
+	"The comfort factor of her new kayak was soon proven because the second day she had it she managed to get herself caught in a narrow inlet between a strong outgoing tide and a strong incoming wind.",
+	"This produced very steep and very fast 3 foot incoming waves (about eye level, every 2-3 seconds) and she also had to deal with 2.5 foot waves bouncing off a nearby jetty coming at her from the side at a somewhat slower pace.",
+	"That's when she decided it might be prudent to get her sorry butt out of there because things were worse farther out.",
+	"This made for a pretty wild ride, particularly in a new boat.",
+	"She survived, so she is pleased with the Acadia's performance in those conditions.",
+	"A local claims 18 knot currents in Sebastian Inlet. She doesn't know about that.",
+	"She'd guess 6-7 knots at whatever level the tide was at that day.",
+	"She knows if she hadn't been able to surf down the face of the waves on the way back, she would have had to ferry her way to one of the jetties to avoid being swept out past the turbulence.",
+	"She couldn't make any forward progress in the troughs nor when there was a break in the waves.",
+	"Others have told her people die in Sebastian Inlet every year. Kayakers, surfers, swimmers, boaters?",
+	"She doesn't know. If you lost your boat out there and didn't have a PFD, she can see how you would be in some really serious trouble.",
+	"You'd soon become exhausted being buffeted around in those kind of waves."
+	];
+	
+var control3 = ["They had an excellent trip yesterday to Del Puerto Canyon, and to the Modesto and Ceres Sewage Ponds.",
+	"The trip leader's plans were to stop at the Grasshopper Sparrow spot (mile 0.5 - 1.0) to look for Blue Grosbeaks and Grasshopper Sparrow,",
+	"then speed up to the Canyon Wren spot (mile 10.4) for Canyon Wren and Costa's Hummingbird, then to Pygmy-Owl spot (mile 13.4) for of course pygmy-owl, and then to the favorite, Steller's Jay spot at mile 19.6.",
+	"Well, the birding gods were smiling down on them yesterday. They viewed every bird at every stop.",
+	"They started off with nice glimpses of Blue Grosbeaks at mile 0.6 followed by outstanding views of a posturing, singing Grasshopper Sparrow that was seen from about 60 feet away.",
+	"They had all scopes out for the best views and they left before the bird did.",
+	"At the graffiti rock pullout (mile 3.6) they saw all of the usual summer birds (Bullock's Oriole, Ash-throated Flycatcher, Western Kingbird, Black-headed Grosbeak) as well as west tanager and a Phainopepla.",
+	"They spotted a green heron at mile 7 and a prairie falcon a little further down the road.",
+	"At canyon wren pullout they saw two Canyon Wrens and a male and female Costa's Hummingbird."
+	];
+
+var self0 = ["My trip from Hays to Washington fills my time for two long days.",
+	"On my first day, I drive over the Snowy Range of southeastern Wyoming, part of the southern Rocky Mountains.",
+	"On my second day, I travel along the eastern shore of Utah's Great Salt Lake, across the Snake River Plain of Idaho, and along the Columbia River.",
+	"I spend my first two nights in motels to stay well-rested.",
+	"My first stop in the Pacific Northwest is Mount Rainier National Park in the Cascade Mountains; here I begin my exploration of the coastal ecosystems of Washington, Oregon, and northern California.",
+	"When conditions permit, I also visit Mount St. Helens (even after more than 20 years, the impact and recovery are impressive).",
+	"From the Cascades, I move to the coast to study temperate rain forests, coastal sand dunes, an estuary, and tide pools.",
+	"My trip home includes a drive through the Sierra Nevada and across the desert to visit Great Basin National Park near the Nevada-Utah border.",
+	"From here, my journey takes me over the Colorado Plateau and Rocky Mountains, back to the Great Plains.",
+	"I am soon home and can summarize my findings."
+	];
+
+var self1 = ["I am Dr. Chris Fritsen, associate director of the Nevada Space Grant Consortium and friend of the Astrobiology Academy.",
+	"I hosted the 2003 crew during their visit to DRI.",
+	"Over breakfast, I spoke about the history of the Desert Research Institute as well as the breath and scope of my current research efforts there.",
+	"I also discussed my astrobiology-related research conducted at DRI as part of NASA's EPSCoR program.",
+	"I gave the academy students the opportunity to tour DRI's facilities, including my vertical laboratory, class 100 clean room, Western Regional Climate Center, and the EcoCells contained in the Great Basin Environmental Research Lab.",
+	"I then led the brave academy students into my cold lab, which is kept at a constant temperature of -10 degrees Celsius!",
+	"As a system microbial ecologist, I utilize these ideal laboratory conditions in order to study life in the extreme environment of ice.",
+	"Finally, I allowed the students to speak with my friend Wendy Calvin, a geophysicist at DRI and member of the Mars Exploration Rover Science team."
+	];
+
+var self2 = ["I traded the 18 foot fiberglass Necky Looksha IV in for a 14 foot plastic Perception Acadia kayak.",
+	"I plan on doing more inland paddling and this is more in keeping with the smaller waters while still being comfortable enough for some rough ocean going, if need be.",
+	"The comfort factor of my new kayak was soon proven because the second day I had it I managed to get myself caught in a narrow inlet between a strong outgoing tide and a strong incoming wind.",
+	"This produced very steep and very fast 3 foot incoming waves (about eye level, every 2-3 seconds) and I also had to deal with 2.5 foot waves bouncing off a nearby jetty coming at me from the side at a somewhat slower pace.",
+	"That's when I decided it might be prudent to get my sorry butt out of there because things were worse farther out.",
+	"This made for a pretty wild ride, particularly in a new boat. I survived, so I'm pleased with the Acadia's performance in those conditions.",
+	"A local claims 18 knot currents in Sebastian Inlet. I don't know about that.",
+	"I'd guess 6-7 knots at whatever level the tide was at that day.",
+	"I know if I hadn't been able to surf down the face of the waves on the way back, I would have had to ferry my way to one of the jetties to avoid being swept out past the turbulence.",
+	"I couldn't make any forward progress in the troughs nor when there was a break in the waves.",
+	"Others have told me people die in Sebastian Inlet every year. Kayakers, surfers, swimmers, boaters?",
+	"I don't know. If you lost your boat out there and didn't have a PFD, I can see how you would be in some really serious trouble.",
+	"You'd soon become exhausted being buffeted around in those kind of waves."
+	];
+
+var self3 = ["I had an excellent trip yesterday to Del Puerto Canyon, and to the Modesto and Ceres Sewage Ponds.",
+	"My plans, as trip leader, were to stop at the Grasshopper Sparrow spot (mile 0.5 - 1.0) to look for Blue Grosbeaks and Grasshopper Sparrow,",
+	"then speed up to the Canyon Wren spot (mile 10.4) for Canyon Wren and Costa's Hummingbird, then to Pygmy-Owl spot (mile 13.4) for of course pygmy-owl, and then to my favorite, the Steller's Jay spot at mile 19.6.",
+	"Well, the birding gods were smiling down on me yesterday. I viewed every bird at every stop.",
+	"I started off with nice glimpses of Blue Grosbeaks at mile 0.6 followed by outstanding views of a posturing, singing Grasshopper Sparrow that was seen from about 60 feet away.",
+	"I had all of my scopes out for nice views and I left before the bird did.",
+	"At the graffiti rock pullout (mile 3.6) I saw the usual summer birds (Bullock's Oriole, Ash-throated Flycatcher, Western Kingbird, Black-headed Grosbeak) as well as west tanager and a Phainopepla.",
+	"I spotted a green heron at mile 7 and a prairie falcon about mile 8.",
+	"At the canyon wren pullout I saw a couple of Canyon Wrens and a male and female Costa's Hummingbird."
+	];
+	
+	
+var control0_block = {
+	type: 'survey-text-table-sp',
+	questions: [control0]
+};
+
+var control1_block = {
+	type: 'survey-text-table-sp',
+	questions: [control1]
+};
+
+var control2_block = {
+	type: 'survey-text-table-sp',
+	questions: [control2]
+};
+
+var control3_block = {
+	type: 'survey-text-table-sp',
+	questions: [control3]
+};
+
+var control_blocks = [control0_block, control1_block, control2_block, control3_block];
+var c_blocks = jsPsych.randomization.repeat(control_blocks,1);
+
+var self0_block = {
+	type: 'survey-text-table-sp',
+	questions: [self0]
+};
+
+var self1_block = {
+	type: 'survey-text-table-sp',
+	questions: [self1]
+};
+
+var self2_block = {
+	type: 'survey-text-table-sp',
+	questions: [self2]
+};
+
+var self3_block = {
+	type: 'survey-text-table-sp',
+	questions: [self3]
+};
+
+var self_blocks = [self0_block, self1_block, self2_block, self3_block];
+var s_blocks = jsPsych.randomization.repeat(self_blocks,1);
+
+var identify_blocks;
+var cond;
+if (self_cond==1){
+	identify_blocks = s_blocks;
+	cond = "self";
+} else {
+	identify_blocks = c_blocks;
+	cond = "cont";
+}
+
+var id = id_num + "_" + cond;
 
 var wordArray = [
     {strong: 'Toast',      weak: 'Basket',        target: '<u><b>BREAD</u></b>'},
@@ -329,7 +488,7 @@ var likert_RRQ = {
       	5,5,5,5,5,5]] // note the the intervals and labels don't necessarily need to match.
   };
     
-  var tetris_300 = {
+var tetris_300 = {
   	type: "single-stim",
   	stimuli: ['<embed src="http://www.classicgamesarcade.com/games/flash-tetris.swf" menu=false width=550 height=650' + 
             'quality=high type="application/x-shockwave-flash"' + 
@@ -338,7 +497,39 @@ var likert_RRQ = {
     timing_response: 5000,
     continue_after_response: false,
     prompt: "Please play tetris for a little while. This page will automatically advance after a certain amount of time."
-  };
+};
+  
+var mTurk_ID_block = {
+	type: 'survey-text',
+	questions: [["What is your Amazon mTurk user ID?"]],
+};
+		
+/*Assign mTurk ID to File Name*/
+var get_mTurk_ID = {
+	type: 'call-function',
+	func: function(){
+		var data = jsPsych.data.getLastTrialData();
+		mturk_id = JSON.parse(data.responses).Q0;
+		id = mturk_id + "_" + id;
+	}
+};
+
+var periodic_save = {
+	type: 'call-function',
+	func: function(data){
+		saveData(id + ".csv", jsPsych.data.dataAsCSV());
+	}
+};
+
+/*Save data function*/
+function saveData(filename, filedata){
+	$.ajax({
+		type:'post',
+		cache: false,
+		url: 'save_data.php',
+		data: {filename: filename, filedata: filedata}
+	});
+}
   
 //Need to make function that pseudo shuffles in pairs (to have learning blocks preceed the test block etc, e.g. T2 learn block is always before T2 Test block)
 //var the_blocks = jsPsych.randomization.repeat(block_T1_study, block_T1,block_T2_study,block_T2,block_T3_study,block_T3,block_R1_study,block_R1,block_R2_study,block_R2,block_R3_study,block_R3], 1);
@@ -359,6 +550,11 @@ var the_blocks = [block_T1_study,
 pairShuff(the_blocks);
 
 var the_experiment = [intro,
+				mTurk_ID_block,
+				identify_blocks[0],
+				identify_blocks[1],
+				identify_blocks[2],
+				identify_blocks[3],
 /*				the_blocks[0],
 				the_blocks[1],
 				tetris,
