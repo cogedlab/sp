@@ -515,8 +515,8 @@ var page_1_questions = ["My attention is often focused on aspects of myself I wi
 
   // defining two different response scales that can be used.
   var scale_1 = ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
-  var scale_2 = ["Strongly Disagree", "Disagree", "Somewhat Disagree", "Neural", "Somewhat Agree", "Agree", "Strongly Agree"];
-
+  var scale_2 = ["Extremely uncharacteristic", "uncharacteristic", "Neither uncharacteristic or characteristic", "Characteristic", "Extremely characteristic"];
+  var scale_0 = ["", "", "", "", ""];
 var likert_RRQ = {
       type: 'survey-likert',
       questions: [page_1_questions],
@@ -528,6 +528,46 @@ var likert_RRQ = {
       	5,5,5,5,5,5,
       	5,5,5,5,5,5,
       	5,5,5,5,5,5]] // note the the intervals and labels don't necessarily need to match.
+  };
+  
+  
+  //Other questionairre - self consciousness scale
+var self_q = ["For each of the following statements there is a scale range from extremely uncharacteristic to extremely characteristic. Please read the items carefully and respond as honestly as possible. There are no correct or incorrect answers.",
+"I'm always trying to figure myself out",
+"I'm concerned about my style of doing things.",
+"Generally, I'm not very aware of myself.",
+"It takes me time to overcome my shyness in new situations.",
+"I reflect about myself a lot.",
+"I'm concerned about the way I present myself.",
+"I'm often the subject of my own fantasies.",
+"I have trouble working when someone is watching me.",
+"I never scrutinize myself.",
+"I get embarassed very easily.",
+"I'm self-conscious about the way I look.",
+"I don't find it hard to talk to strangers.",
+"I'm generally attentive to my inner feelings.",
+"I usually worry about making a good impression.",
+"I'm constantly examining my motives.",
+"I feel anxious when I speak in front of a group.",
+"One of the last things I do before leaving my house is look in the mirror.",
+"I sometimes have the feeling that I'm off somewhere watching myself.",
+"I'm concerned about what other people think of me.",
+"I'm alert to changes in my mood.",
+"I'm usually aware of my appearance.",
+"I'm aware of the way my mind works when I work through a problem.",
+"Large groups make me nervous."];  
+  
+  var self_refl = {
+      type: 'survey-likert',
+      questions: [self_q],
+      labels: [[scale_0,scale_2,scale_2,scale_2,scale_2,scale_2,scale_2,
+      	scale_2,scale_2,scale_2,scale_2,scale_2,scale_2,
+      	scale_2,scale_2,scale_2,scale_2,scale_2,scale_2,
+      	scale_2,scale_2,scale_2,scale_2,scale_2]], // need one scale for every question on a page
+      intervals: [[0,5,5,5,5,5,5,
+      	5,5,5,5,5,5,
+      	5,5,5,5,5,5,
+      	5,5,5,5,5]] // note the the intervals and labels don't necessarily need to match.
   };
     
 var tetris_300 = {
@@ -634,7 +674,7 @@ var the_blocks = [block_T1_study,
 
 pairShuff(the_blocks);
 
-var the_experiment = [introduction,
+var the_experiment = [self_refl,introduction,
 				mTurk_ID_block,
 				get_mTurk_ID,
 				periodic_save,
