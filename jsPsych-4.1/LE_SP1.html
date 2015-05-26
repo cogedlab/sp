@@ -14,7 +14,7 @@
     <script src="plugins/jspsych-survey-text-table-sp.js"></script>
     <script src="plugins/jspsych-call-function.js"></script>
     <script src="plugins/jspsych-html.js"></script>
-    <link rel="stylesheet" href="css/jquery-ui.css"></link>
+    <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/jspsych.css">
   </head>
   <body>
@@ -24,6 +24,29 @@
 
 var self_cond = Math.round(Math.random());
 var id_num = Math.floor(Math.random()*1000000);
+
+/*Intro Stuff*/
+		var review_secs = 5; //Should be 300s
+		var intro_text;
+		if (review_secs==300) {
+			intro_text="<h2>Welcome to our study!</h2><br>" +
+			"<p>We'll get started in one moment, but please first answer some initial questions. Press any key to continue.</p>";
+		} else {
+			intro_text="<h1>DEBUG MODE: " + id + "</h1>";
+		}
+		var introduction = {
+			type: 'text',
+			text: intro_text,
+		};
+		
+var intro_inst = {
+	type: "text",
+	text: "Welcome to our study!<br><br>"+
+	"<p>Today you will be learning word pairs, and try to recall words from them later on in this session. In between blocks of learning word pairs, you will complete brief verbal fluency tasks as well as play Tetris of brief periods of time.</p><br>"+
+	"<p>Please don't write down any of the information. Your test performance will not affect your compensation.</p>"+
+  	"<br><p>Please do <b>NOT</b> <u>refresh the page</u> or <u>tab away</u> during the study or you <u>will not</u> be compensated.</p><br>" +
+  	"<p>This study should take you approximately 40 minutes. Please do the study in one sitting (i.e. go all the way through without stopping). You will receive an alphanumeric code at the conclusion of the study to input into mTurk. <u>Press any key to begin</u>.</p>"
+};
 
 /*Consent Functions and Block*/
 		var check_consent = function() {
@@ -58,6 +81,7 @@ var id_num = Math.floor(Math.random()*1000000);
 			type: 'survey-text-table-sp',
 			questions: demog_qs
 		};
+
 
 var control0 = ["The trip from Hays to Washington fills his time for two long days.",
 	"On his first day, he drives over the Snowy Range of southeastern Wyoming, part of the southern Rocky Mountains.",
@@ -205,16 +229,38 @@ var s_blocks = jsPsych.randomization.repeat(self_blocks,1);
 
 var identify_blocks;
 var cond;
+var ident_text;
 if (self_cond==1){
 	identify_blocks = s_blocks;
 	cond = "self";
+	ident_text = "For each sentence count the number of times you see these words <b>[ me, my, myself, mine, I ]</b> and then check the number at the end of the line. Be as fast and accurate as possible.";
 } else {
 	identify_blocks = c_blocks;
 	cond = "cont";
+	ident_text = "For each sentence count the number of times you see these words <b>[ the, an, a, it ]</b> and then check the number at the end of the line. Be as fast and accurate as possible.";
 }
 
 var id = "sp1_" + id_num + "_" + cond;
 var code = "sp1_" + id_num + "_" + cond;
+
+/*Instructions for Indeifiy Blocks*/
+var identify_inst = {
+	type: "text",
+	text: "On the following page you will now be shown a passage. "+ident_text+"<br><br>Press any key to continue"
+};
+
+/*Instructions for the word pairs blocks*/
+var word_inst1 = {
+	type: "text",
+	text: "Now you will view pairs of words, and rate their relatedness to each other on a scale. The goal is try to remember the word on the right for a later test. After rating the relatedness of the pair, press next to view the next pair."
+};
+
+var word_inst2 = {
+	type: "text",
+	text: "Now you are either going to be asked to remember and type in the word on the right that was shown previously, or you are going the be asked to rate the relatedness of the words again.<br><br>"+
+	"Please try and remember the word on the right for later test.<br><br>"+
+	"Press any key to continue."
+	};
 
 var wordArray = [
     {strong: 'Toast',      weak: 'Basket',        target: '<u><b>BREAD</u></b>'},
@@ -344,27 +390,6 @@ var block_R2 = {
 };
 
 
-/*var R3_stim_orig = [];
-
-var R3_study_stim = jsPsych.randomization.repeat(R3_stim_orig, 1);//Shuffled
-var block_R3_study = {
-	type: 'single-stim',
-	stimuli: R3_study_stim,
-	is_html: true,
-	choices: ['1','2','3','4','5'], // 1 through 5 relatedness
-    prompt: '<hr><p class="center-content">Rate relatedness of the word pair: 1 (low) - 5(high)</p>'
-};
-
-var R3_stim = jsPsych.randomization.repeat(R3_stim_orig, 1);//Shuffled
-var block_R3 = {
-	type: 'single-stim',
-	stimuli: R3_stim,
-	is_html: true,
-	choices: ['1','2','3','4','5'], // 1 through 5 relatedness
-    prompt: '<hr><p class="center-content">Rate relatedness of the word pair: 1 (low) - 5(high)</p>'
-};*/
-
-//
 //study stim
 var T1_stim_study_orig = ['<center>'+wordArray[24].strong+'    '+wordArray[24].target+'</center>',
 		'<center>'+wordArray[25].weak+'    '+wordArray[25].target+'</center>',
@@ -458,27 +483,6 @@ var block_T2 = {
 	
 };
 
-/*var T3_stim_study_orig = [
-		];
-
-var T3_study_stim = jsPsych.randomization.repeat(T3_stim_study_orig, 1);//Shuffled
-var block_T3_study = {
-	type: 'single-stim',
-	stimuli: T3_study_stim,
-	is_html: true,
-	choices: ['1','2','3','4','5'], // 1 through 5 relatedness
-    prompt: '<hr><p class="center-content">Rate relatedness of the word pair: 1 (low) - 5(high)</p>'
-};
-var T3_stim_orig =[
-		];
-
-var T3_stim = jsPsych.randomization.repeat(T3_stim_orig, 1);//Shuffled
-var block_T3 = {
-	type: 'survey-text-table',
-	questions: T3_stim,
-	is_html: true,
-};*/
-
 var final_exam_block = {
 			type: "survey-text-test",
 			questions: [["Please type all of the words that you remember from the experiment. Please put a comma between each word."]]
@@ -532,7 +536,7 @@ var tetris_300 = {
             'quality=high type="application/x-shockwave-flash"' + 
             'pluginspage="http://www.macromedia.com/go/getflashplayer/" />'],
     is_html: true,
-    timing_response: 300*1000,
+    timing_response: review_secs*1000,
     continue_after_response: false,
     prompt: "Please play tetris for a little while. This page will automatically advance after a certain amount of time."
 };
@@ -630,30 +634,43 @@ var the_blocks = [block_T1_study,
 
 pairShuff(the_blocks);
 
-var the_experiment = [intro,
+var the_experiment = [introduction,
 				mTurk_ID_block,
 				get_mTurk_ID,
-/*				periodic_save,
-				consent_block,
-				demographics_block,
+				periodic_save,
+/*				consent_block,
+				demographics_block,*/
+				intro_inst,
+				identify_inst,
 				identify_blocks[0],
+				word_inst1,
 				the_blocks[0],
 				tetris_15,
+				word_inst2,
 				the_blocks[1],
-				periodic_save,
+/*				periodic_save,
+				identify_inst,
 				identify_blocks[1],
+				word_inst1,
 				the_blocks[2],
 				tetris_15,
+				word_inst2,
 				the_blocks[3],
 				periodic_save,
+				identify_inst,
 				identify_blocks[2],
 				the_blocks[4],
+				word_inst1,
 				tetris_15,
+				word_inst2,
 				the_blocks[5],
 				periodic_save,
+				identify_inst,
 				identify_blocks[3],
 				the_blocks[6],
+				word_inst1,
 				tetris_15,
+				word_inst2,
 				the_blocks[7],
 				tetris_300,*/
 				final_exam_block,
