@@ -484,9 +484,12 @@ var block_T2 = {
 };
 
 var final_exam_block = {
-			type: "survey-text-test",
-			questions: [["Please type all of the words that you remember from the experiment. Please put a comma between each word."]]
-		};
+			type: "single-stim",
+			stimuli: ['<iframe src="final_test.html" name="id" width="900" height="500" frameborder="0"></iframe>'],
+			is_html: true,
+			timing_response: 300 * 1000,
+			continue_after_response: false
+			};
 
 var page_1_questions = ["My attention is often focused on aspects of myself I wish I'd stop thinking about.",
  "I always seem to be rehashing in my mind recent things I've said or done.",
@@ -678,8 +681,8 @@ var the_experiment = [self_refl,introduction,
 				mTurk_ID_block,
 				get_mTurk_ID,
 				periodic_save,
-/*				consent_block,
-				demographics_block,*/
+				consent_block,
+				demographics_block,
 				intro_inst,
 				identify_inst,
 				identify_blocks[0],
@@ -688,7 +691,7 @@ var the_experiment = [self_refl,introduction,
 				tetris_15,
 				word_inst2,
 				the_blocks[1],
-/*				periodic_save,
+				periodic_save,
 				identify_inst,
 				identify_blocks[1],
 				word_inst1,
@@ -712,7 +715,7 @@ var the_experiment = [self_refl,introduction,
 				tetris_15,
 				word_inst2,
 				the_blocks[7],
-				tetris_300,*/
+				tetris_300,
 				final_exam_block,
 				likert_RRQ,
 				final_qs_inst,
