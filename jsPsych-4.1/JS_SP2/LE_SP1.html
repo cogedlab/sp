@@ -669,19 +669,14 @@ function saveData(filename, filedata){
 			"<br><p>Your mTurk confirmation code is on the following page. Press any key to continue.</p>"
 		};
   
-//Need to make function that pseudo shuffles in pairs (to have learning blocks preceed the test block etc, e.g. T2 learn block is always before T2 Test block)
-//var the_blocks = jsPsych.randomization.repeat(block_T1_study, block_T1,block_T2_study,block_T2,block_T3_study,block_T3,block_R1_study,block_R1,block_R2_study,block_R2,block_R3_study,block_R3], 1);
-var the_blocks = [block_T1_study,
-				block_T1,
-				block_T2_study,
-				block_T2,
-				block_R1_study,
-				block_R1,
-				block_R2_study,
-				block_R2,
-				];
+  
+rand_nums = [0,2,4,6];
 
-pairShuff(the_blocks);
+var rand_nums = jsPsych.randomization.repeat(rand_nums,1);
+
+var the_blocks = [block_T1_study, block_T1, block_T2_study, block_T2,block_R1_study, block_R1,block_R2_study, block_R2];
+
+
 
 var the_experiment = [
 			//Introduction Stuff
@@ -696,37 +691,37 @@ var the_experiment = [
 				identify_inst,
 				identify_blocks[0],
 				word_inst1,
-				the_blocks[0],
+				the_blocks[rand_nums[0]],
 				tetris_15,
 				word_inst2,
-				the_blocks[1],
+				the_blocks[rand_nums[0]+1],
 				periodic_save,
 			//Block 2
 				identify_inst,
 				identify_blocks[1],
 				word_inst1,
-				the_blocks[2],
+				the_blocks[rand_nums[1]],
 				tetris_15,
 				word_inst2,
-				the_blocks[3],
+				the_blocks[rand_nums[1]+1],
 				periodic_save,
 			//Block 3
 				identify_inst,
 				identify_blocks[2],
 				word_inst1,
-				the_blocks[4],
+				the_blocks[rand_nums[2]],
 				tetris_15,
 				word_inst2,
-				the_blocks[5],
+				the_blocks[rand_nums[2]+1],
 				periodic_save,
 			//Block 4
 				identify_inst,
 				identify_blocks[3],
 				word_inst1,
-				the_blocks[6],
+				the_blocks[rand_nums[3]],
 				tetris_15,
 				word_inst2,
-				the_blocks[7],
+				the_blocks[rand_nums[3]+1],
 				periodic_save,
 			//Final Delay and Test
 				tetris_300,
