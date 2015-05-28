@@ -13,6 +13,8 @@
 	</body>
 	<script>
 		/*image preloading*/
+		var preimages = ['img/happy_face_1.jpg'];
+		jsPsych.preloadImages(preimages, function(){ startExperiment(); });
 
 		/*Random number id creation*/
 		var id = Math.floor(Math.random()*1000000000);
@@ -34,24 +36,22 @@
 
 		/*Define presentation block*/
 		
-		var test_stimuli = ['<h1><center>Toast - check</center></h1>','<h1><center>Toast - chec</center></h1>'];
-		
+		var test_stimuli = ['<h1><center>Orange</center></h1>'];
 		var all_trials = jsPsych.randomization.repeat(test_stimuli, 1);
 		
 		/*Test Block 1*/
 		var test_block = {
-			type: 'single-stim',
-			stimuli: all_trials, /*BTW all_trials[1], will just get the first trial!*/
-			choices: ['1','2','3','4','5']
+			type: "single-stim",
+			stimuli: all_trials,
+			timing_response: 1500,
 			is_html: true,
-			
-			
+			continue_after_response: false
 		};
 		
 		/*Exam Block*/
 		var exam_block = {
 			type: "survey-text",
-			questions: [["Please type all of the UPPERCASE words that you remember from the experiment.", 
+			questions: [["Please type all of the words that you remember from the experiment.", 
 			"Please type in all of the images you remember from the experiment."]]
 		};
 		
@@ -70,7 +70,7 @@
 			["What type of device were you using (i.e. MacBook Pro, HP Probook, Lenovo, iPhone, iPad, etc.)",
 			"What Browser were you using? (i.e. Chrome, Firefox, Internet Explorer, Safari)",
 			"What Operating System do you use? (i.e. Windows 7, OS-X, Linux, etc.)",
-			"What kind of internet were you using? (Hardlline, Wifi, 4G, etc.)"],
+			"What kind of internet were you using? (Hardlline, Wifi, 4G, etc.)",],
 			["Where were you doing this study? (i.e. at home, at a cafe, library, etc.)",
 			"Was there any background noise while doing the experiment?",
 			"Did you switch to any other tabs during the experiment?",

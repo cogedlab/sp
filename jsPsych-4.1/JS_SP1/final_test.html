@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SP Final Test</title>
+	    <script src="tests&examples/js/jquery.min.js"></script>
+	    <script src="tests&examples/js/jquery-ui.min.js"></script>
+    	<script src="jspsych.js"></script>
+	    <script src="plugins/jspsych-survey-text-test.js"></script>
+	    <script src="plugins/jspsych-call-function.js"></script>
+	    <link rel="stylesheet" href="css/jquery-ui.css">
+	    <link rel="stylesheet" href="css/jspsych.css">	</head>
+	<body>
+	    <div id="jspsych-target"></div>
+	</body>
+	<script>
+		id=window.parent.id;
+		var periodic_save = {
+			type: 'call-function',
+			func: function(data){
+				saveData(id + "_sp1_RESPONSES.csv", jsPsych.data.dataAsCSV());
+			}
+		};
+		
+		var test_block = {
+			type: "survey-text-test",
+			questions: [["Please enter any word that you can remember from study. After each word, press 'Submit Answers'."]]
+		};
+		
+		loop_timeline = [test_block, periodic_save];
+		
+		var test_loop = {
+			chunk_type: 'while',
+			timeline: loop_timeline,
+			continue_function: function(){
+				return true;
+			}
+		};
+			
+		var experiment = [test_loop];
+
+		function saveData(filename, filedata){
+			$.ajax({
+				type:'post',
+				cache: false,
+				url: 'save_data.php',
+				data: {filename: filename, filedata: filedata}
+			});
+		}
+		
+		jsPsych.init({
+			display_element: $('#jspsych-target'),
+			experiment_structure: experiment,
+		});
+		
+	</script>
+</html>
