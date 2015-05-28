@@ -45,7 +45,7 @@ var intro_inst = {
 	"<p>Today you will be learning word pairs, and try to recall words from them later on in this session. In between blocks of learning word pairs, you will complete brief verbal fluency tasks as well as play Tetris of brief periods of time.</p><br>"+
 	"<p>Please don't write down any of the information. Your test performance will not affect your compensation.</p>"+
   	"<br><p>Please do <b>NOT</b> <u>refresh the page</u> or <u>tab away</u> during the study or you <u>will not</u> be compensated.</p><br>" +
-  	"<p>This study should take you approximately 40 minutes. Please do the study in one sitting (i.e. go all the way through without stopping). You will receive an alphanumeric code at the conclusion of the study to input into mTurk. <u>Press any key to begin</u>.</p>"
+  	"<p>This study should take you approximately 25 minutes. Please do the study in one sitting (i.e. go all the way through without stopping). You will receive an alphanumeric code at the conclusion of the study to input into mTurk. <u>Press any key to begin</u>.</p>"
 };
 
 /*Consent Functions and Block*/
@@ -75,7 +75,7 @@ var intro_inst = {
 		['What type of device are you using (i.e. MacBook Pro, HP Probook, Lenovo, iPhone, iPad, etc.)',
 		'What Browser are you using? (i.e. Chrome, Firefox, Internet Explorer, Safari)',
 		'What Operating System do you use? (i.e. Windows 7, Apple OS-X, Linux, etc.)',
-		'What kind of internet were you using? (Hardline (Ethernet), Wifi, 4G, etc.)'
+		'What kind of internet are you using? (Hardline (Ethernet), Wifi, 4G, etc.)'
 		]];
 		var demographics_block = {
 			type: 'survey-text-table-sp',
@@ -233,17 +233,17 @@ var ident_text;
 if (self_cond==1){
 	identify_blocks = s_blocks;
 	cond = "self";
-	ident_text = "For each sentence count the number of times you see these words <b>[ me, my, myself, mine, I ]</b> and then check the number at the end of the line. Be as fast and accurate as possible.";
+	ident_text = "For each sentence count the number of times you see these words <b>[ me, my, myself, mine, I ]</b> and then type in the number at the end of the line. Be as fast and accurate as possible.";
 } else {
 	identify_blocks = c_blocks;
 	cond = "cont";
-	ident_text = "For each sentence count the number of times you see these words <b>[ the, an, a, it ]</b> and then check the number at the end of the line. Be as fast and accurate as possible.";
+	ident_text = "For each sentence count the number of times you see these words <b>[ the, an, a, it ]</b> and then type in the number at the end of the line. Be as fast and accurate as possible.";
 }
 
 var id = "sp1_" + id_num + "_" + cond;
 var code = "sp1_" + id_num + "_" + cond;
 
-/*Instructions for Indeifiy Blocks*/
+/*Instructions for Indentifiy Blocks*/
 var identify_inst = {
 	type: "text",
 	text: "On the following page you will now be shown a passage. "+ident_text+"<br><br>Press any key to continue"
@@ -252,12 +252,12 @@ var identify_inst = {
 /*Instructions for the word pairs blocks*/
 var word_inst1 = {
 	type: "text",
-	text: "Now you will view pairs of words, and rate their relatedness to each other on a scale. The goal is try to remember the word on the right for a later test. After rating the relatedness of the pair, press next to view the next pair."
+	text: "Now you will view pairs of words, and rate their relatedness to each other on a scale. The goal is try to remember the word on the right for a later test. After rating the relatedness of the pair, the page will automatically advance to view the next pair."
 };
 
 var word_inst2 = {
 	type: "text",
-	text: "Now you are either going to be asked to remember and type in the word on the right that was shown previously, or you are going the be asked to rate the relatedness of the words again.<br><br>"+
+	text: "Now you are either going to be asked to remember and type in the word on the right that was shown previously, <b><u>or</b></u> you are going the be asked to rate the relatedness of the words again.<br><br>"+
 	"Please try and remember the word on the right for later test.<br><br>"+
 	"Press any key to continue."
 	};
@@ -491,7 +491,8 @@ var final_exam_block = {
 			continue_after_response: false
 			};
 
-var page_1_questions = ["My attention is often focused on aspects of myself I wish I'd stop thinking about.",
+var page_1_questions = ["For each of the following statements there is a scale range from Strongly Disagree to Strongly Agree. Please read the items carefully and respond as honestly as possible. There are no correct or incorrect answers.",
+ "My attention is often focused on aspects of myself I wish I'd stop thinking about.",
  "I always seem to be rehashing in my mind recent things I've said or done.",
  "Sometimes it is hard for me to shut off thoughts about myself.",
  "Long after an argument or disagreement is over with, my thoughts keep going back to what happened.",
@@ -523,11 +524,11 @@ var page_1_questions = ["My attention is often focused on aspects of myself I wi
 var likert_RRQ = {
       type: 'survey-likert',
       questions: [page_1_questions],
-      labels: [[scale_1,scale_1,scale_1,scale_1,scale_1,scale_1,
+      labels: [[scale_0, scale_1,scale_1,scale_1,scale_1,scale_1,scale_1,
       	scale_1,scale_1,scale_1,scale_1,scale_1,scale_1,
       	scale_1,scale_1,scale_1,scale_1,scale_1,scale_1,
       	scale_1,scale_1,scale_1,scale_1,scale_1,scale_1]], // need one scale for every question on a page
-      intervals: [[5,5,5,5,5,5,
+      intervals: [[0,5,5,5,5,5,5,
       	5,5,5,5,5,5,
       	5,5,5,5,5,5,
       	5,5,5,5,5,5]] // note the the intervals and labels don't necessarily need to match.
@@ -581,7 +582,7 @@ var tetris_300 = {
     is_html: true,
     timing_response: review_secs*1000,
     continue_after_response: false,
-    prompt: "Please play tetris for a little while. This page will automatically advance after a certain amount of time."
+    prompt: "Please play tetris for 5 minutes. This page will automatically advance after time is up."
 };
   
 var tetris_15 = {
@@ -636,6 +637,11 @@ function saveData(filename, filedata){
  * 
  */
 		/*Final Instructions + Questions*/
+		var questions_inst = {
+			type: "text",
+			text: "You are now going to fill out two questionnaires. Please answer as honestly as you can. There is no right or wrong answer. For both surveys, slide the bar to respresent your response.<br><br>Press any key ton continue."	
+		};
+		
 		var final_qs_inst = {
 			type: "text",
 			text: "Thank you for taking the test. You will now be asked some final questions regarding this experiment.<br><br>"+
@@ -677,13 +683,16 @@ var the_blocks = [block_T1_study,
 
 pairShuff(the_blocks);
 
-var the_experiment = [introduction,
+var the_experiment = [
+			//Introduction Stuff
+				introduction,
 				mTurk_ID_block,
 				get_mTurk_ID,
 				periodic_save,
 				consent_block,
 				demographics_block,
 				intro_inst,
+			//Block 1
 				identify_inst,
 				identify_blocks[0],
 				word_inst1,
@@ -692,6 +701,7 @@ var the_experiment = [introduction,
 				word_inst2,
 				the_blocks[1],
 				periodic_save,
+			//Block 2
 				identify_inst,
 				identify_blocks[1],
 				word_inst1,
@@ -700,27 +710,35 @@ var the_experiment = [introduction,
 				word_inst2,
 				the_blocks[3],
 				periodic_save,
+			//Block 3
 				identify_inst,
 				identify_blocks[2],
-				the_blocks[4],
 				word_inst1,
+				the_blocks[4],
 				tetris_15,
 				word_inst2,
 				the_blocks[5],
 				periodic_save,
+			//Block 4
 				identify_inst,
 				identify_blocks[3],
-				the_blocks[6],
 				word_inst1,
+				the_blocks[6],
 				tetris_15,
 				word_inst2,
 				the_blocks[7],
+				periodic_save,
+			//Final Delay and Test
 				tetris_300,
 				final_exam_block,
+				periodic_save,
+			//Final Surveys
+				questions_inst,
 				likert_RRQ,
 				likert_SCS,
 				final_qs_inst,
 				final_questions,
+				periodic_save,
 				last_page
 				];
 
